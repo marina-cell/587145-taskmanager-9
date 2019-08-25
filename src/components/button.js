@@ -1,3 +1,3 @@
-export const createButtonTemplate = () => {
-  return `<button class="load-more" type="button">load more</button>`;
+export const createButtonTemplate = (className, title) => {
+  return `<button class="${className}" type="button">${title}</button>`;
 };

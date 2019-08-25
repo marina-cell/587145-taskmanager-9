@@ -43,7 +43,7 @@ const renderCards = (fromCard, toCard) => {
 renderCards(tasksForRender.renderedCount + 1, tasksForRender.MAX + tasksForRender.renderedCount);
 
 if (tasksForRender.renderedCount < allTasks.length) {
-  render(boardElement, createButtonTemplate(), `beforeend`);
+  render(boardElement, createButtonTemplate(`load-more`, `load more`), `beforeend`);
 }
 
 const loadMoreButton = document.querySelector(`.load-more`);
