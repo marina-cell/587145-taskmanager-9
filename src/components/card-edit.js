@@ -1,5 +1,5 @@
-export const createCardEditTemplate = ({description, dueDate, repeatingDays, tags, color}) => {
-  return `<article class="card card--edit card--${color} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `card--repeat` : ``}">
+export const createCardEditTemplate = ({description, dueDate, repeatingDays, color}, isReapeting, tags) => {
+  return `<article class="card card--edit card--${color} ${isReapeting ? `card--repeat` : ``}">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -50,7 +50,7 @@ export const createCardEditTemplate = ({description, dueDate, repeatingDays, tag
                       </fieldset>
 
                       <button class="card__repeat-toggle" type="button">
-                        repeat:<span class="card__repeat-status">${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `yes` : `no`}</span>
+                        repeat:<span class="card__repeat-status">${isReapeting ? `yes` : `no`}</span>
                       </button>
 
                       <fieldset class="card__repeat-days">
@@ -139,7 +139,7 @@ export const createCardEditTemplate = ({description, dueDate, repeatingDays, tag
                     <div class="card__hashtag">
                       <div class="card__hashtag-list">
 
-                      ${Array.from(tags).sort(() => Math.random() - 0.5).slice(0, Math.round(Math.random() * 3)).map((tag) => `
+                      ${tags.map((tag) => `
                         <span class="card__hashtag-inner">
                           <input
                             type="hidden"

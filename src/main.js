@@ -30,11 +30,16 @@ render(siteMainElement, createBoardTemplate(), `beforeend`);
 const boardElement = siteMainElement.querySelector(`.board`);
 const taskListElement = siteMainElement.querySelector(`.board__tasks`);
 
-render(taskListElement, createCardEditTemplate(allTasks[0]), `beforeend`);
+const editTask = allTasks[0];
+const isReapetingEdit = Object.keys(editTask.repeatingDays).some((day) => editTask.repeatingDays[day]);
+const randomTagsEdit = Array.from(editTask.tags).sort(() => Math.random() - 0.5).slice(0, Math.round(Math.random() * 3));
+render(taskListElement, createCardEditTemplate(editTask, isReapetingEdit, randomTagsEdit), `beforeend`);
 
 const renderCards = (fromCard, toCard) => {
   for (const task of allTasks.slice(fromCard, toCard)) {
-    render(taskListElement, createCardTemplate(task), `beforeend`);
+    const isReapeting = Object.keys(task.repeatingDays).some((day) => task.repeatingDays[day]);
+    const randomTags = Array.from(task.tags).sort(() => Math.random() - 0.5).slice(0, Math.round(Math.random() * 3));
+    render(taskListElement, createCardTemplate(task, isReapeting, randomTags), `beforeend`);
   }
   tasksForRender.renderedCount += tasksForRender.MAX;
   tasksForRender.renderedCount = tasksForRender.renderedCount > allTasks.length ? allTasks.length : tasksForRender.renderedCount;
