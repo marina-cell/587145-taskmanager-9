@@ -1,4 +1,6 @@
-class AbstractComponent {
+import {createElement} from '../utils.js';
+
+export default class AbstractComponent {
   constructor() {
     this._element = null;
   }
